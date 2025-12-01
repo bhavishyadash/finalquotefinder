@@ -1,0 +1,32 @@
+<%- include('header.html') %>
+
+<div class="container mt-4">
+  <h2>Authors</h2>
+  <a class="btn btn-success mb-3" href="/admin/authors/add">Add Author</a>
+  <table class="table">
+    <thead><tr><th>Name</th><th>Actions</th></tr></thead>
+    <tbody>
+      <% for (let a of authors) { %>
+        <tr>
+          <td><%= a.firstName %> <%= a.lastName %></td>
+          <td>
+            <a class="btn btn-sm btn-primary" href="/admin/authors/edit/<%= a.authorId %>">Edit</a>
+            <form class="delete-form" style="display:inline" method="POST" action="/admin/authors/delete/<%= a.authorId %>">
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('footer.html') %>
+
+<script>
+  document.querySelectorAll('.delete-form').forEach(f=>{
+    f.addEventListener('submit', function(e){
+      if (!confirm('Are you sure you want to delete this item?')) e.preventDefault();
+    });
+  });
+</script>

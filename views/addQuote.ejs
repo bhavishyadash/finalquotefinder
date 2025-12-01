@@ -1,0 +1,25 @@
+<%- include('header.html') %>
+
+<div class="container mt-4">
+    <h2><%= quote && quote.quoteId ? 'Edit Quote' : 'Add Quote' %></h2>
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+    <form method="POST" action="<%= quote && quote.quoteId ? ('/admin/quotes/edit/' + quote.quoteId) : '/admin/quotes/add' %>">
+        <div class="mb-3">
+            <label class="form-label">Quote</label>
+            <textarea class="form-control" name="quote"><%= quote.quote || '' %></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Author</label>
+            <select class="form-select" name="authorId">
+                <% for (let a of authors) { %>
+                    <option value="<%= a.authorId %>" <%= quote.authorId == a.authorId ? 'selected' : '' %>><%= a.firstName %> <%= a.lastName %></option>
+                <% } %>
+            </select>
+        </div>
+        <button class="btn btn-primary"><%= quote && quote.quoteId ? 'Save Changes' : 'Add Quote' %></button>
+    </form>
+</div>
+
+<%- include('footer.html') %>

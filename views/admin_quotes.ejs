@@ -1,0 +1,33 @@
+<%- include('header.html') %>
+
+<div class="container mt-4">
+  <h2>Quotes</h2>
+  <a class="btn btn-success mb-3" href="/admin/quotes/add">Add Quote</a>
+  <table class="table">
+    <thead><tr><th>Quote</th><th>Author</th><th>Actions</th></tr></thead>
+    <tbody>
+      <% for (let q of quotes) { %>
+        <tr>
+          <td><%= q.quote %></td>
+          <td><%= q.firstName %> <%= q.lastName %></td>
+          <td>
+            <a class="btn btn-sm btn-primary" href="/admin/quotes/edit/<%= q.quoteId %>">Edit</a>
+            <form class="delete-form" style="display:inline" method="POST" action="/admin/quotes/delete/<%= q.quoteId %>">
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('footer.html') %>
+
+<script>
+  document.querySelectorAll('.delete-form').forEach(f=>{
+    f.addEventListener('submit', function(e){
+      if (!confirm('Are you sure you want to delete this quote?')) e.preventDefault();
+    });
+  });
+</script>

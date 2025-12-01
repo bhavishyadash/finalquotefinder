@@ -1,0 +1,12 @@
+<%- include('header.html') %>
+
+<div class="container mt-4">
+  <h2>Admin Dashboard</h2>
+  <p>Welcome, <%= user.username %></p>
+  <ul>
+    <li><a href="/admin/authors">Manage Authors</a></li>
+    <li><a href="/admin/quotes">Manage Quotes</a></li>
+  </ul>
+</div>
+
+<%- include('footer.html') %>

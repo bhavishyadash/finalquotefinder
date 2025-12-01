@@ -1,0 +1,30 @@
+<%- include('header.html') %>
+
+<div class="container mt-4">
+        <h2><%= author && author.authorId ? 'Edit Author' : 'Add Author' %></h2>
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="alert alert-danger"><%= error %></div>
+        <% } %>
+    <form method="POST" action="<%= author && author.authorId ? ('/admin/authors/edit/' + author.authorId) : '/admin/authors/add' %>">
+        <div class="mb-3">
+            <label class="form-label">First Name</label>
+            <input class="form-control" name="fn" value="<%= author.firstName || '' %>">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Last Name</label>
+            <input class="form-control" name="ln" value="<%= author.lastName || '' %>">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Date of Birth</label>
+            <input class="form-control" type="date" name="dob" value="<%= author.dob ? author.dob.toISOString().slice(0,10) : '' %>">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Biography</label>
+            <textarea class="form-control" name="bio"><%= author.bio || '' %></textarea>
+        </div>
+        <button class="btn btn-primary"><%= author && author.authorId ? 'Save Changes' : 'Add Author' %></button>
+    </form>
+
+</div>
+
+<%- include('footer.html') %>

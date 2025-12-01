@@ -1,0 +1,31 @@
+<%- include('header.html') %>
+
+<div class="container mt-4">
+  <form action="/searchByKeyword" method="GET" class="mb-3">
+    <div class="input-group">
+      <input class="form-control" name="keyword" placeholder="Search quotes by keyword">
+      <button class="btn btn-outline-success">Search</button>
+    </div>
+  </form>
+
+  <form action="/searchByAuthor" method="GET" class="mb-3">
+    <div class="input-group">
+      <select class="form-select" name="authorId">
+        <% for (let row of rows) { %>
+          <option value="<%= row.authorId %>"><%= row.firstName %> <%= row.lastName %></option>
+        <% } %>
+      </select>
+      <button class="btn btn-outline-success">Search</button>
+    </div>
+  </form>
+
+  <p>
+    <% if (user) { %>
+      <a class="btn btn-primary" href="/admin">Go to Admin</a>
+    <% } else { %>
+      <a class="btn btn-secondary" href="/login">Admin Login</a>
+    <% } %>
+  </p>
+</div>
+
+<%- include('footer.html') %>

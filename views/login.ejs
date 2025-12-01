@@ -1,0 +1,21 @@
+<%- include('header.html') %>
+
+<div class="container mt-4">
+  <h2>Admin Login</h2>
+  <% if (error) { %>
+    <div class="alert alert-danger"><%= error %></div>
+  <% } %>
+  <form method="POST" action="/login">
+    <div class="mb-3">
+      <label class="form-label">Username</label>
+      <input class="form-control" name="username">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input class="form-control" type="password" name="password">
+    </div>
+    <button class="btn btn-primary">Login</button>
+  </form>
+</div>
+
+<%- include('footer.html') %>

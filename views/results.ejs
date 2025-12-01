@@ -1,0 +1,32 @@
+<%- include('header.html') %>
+
+<div class="container mt-4">
+    <% for (let row of rows) {  %>
+        <blockquote class="blockquote">
+            <p>"<%= row.quote %>"</p>
+            <footer class="blockquote-footer"><a href="#" class="author-link" data-author-id="<%= row.authorId %>"><%= row.firstName %> <%= row.lastName %></a></footer>
+        </blockquote>
+    <% } %>
+
+    <div id="authorInfo" class="mt-4">
+        <h2 id="authorName"></h2>
+        <img id="authorImage" style="max-width:200px">
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.author-link').forEach(el=>{
+        el.addEventListener('click', async (e)=>{
+            e.preventDefault();
+            const authorId = el.dataset.authorId;
+            const res = await fetch('/api/authors/' + authorId);
+            const data = await res.json();
+            if (data && data[0]){
+                document.querySelector('#authorName').textContent = data[0].firstName + ' ' + data[0].lastName;
+                document.querySelector('#authorImage').src = data[0].portrait || '';
+            }
+        });
+    });
+</script>
+
+<%- include('footer.html') %>
